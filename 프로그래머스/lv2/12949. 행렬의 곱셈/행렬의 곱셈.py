@@ -1,7 +1,2 @@
-import numpy as np
 def solution(arr1, arr2):
-    a1 = np.array(arr1)
-    a2 = np.array(arr2)
-    nam = a1.dot(a2)
-    return nam.tolist()
-        
+    return [[sum (a*b for a, b in zip(A_row, B_col)) for B_col in zip(*arr2)] for A_row in arr1]
