@@ -1,5 +1,10 @@
 def solution(elements):
     n = len(elements)
-    elements *= 2
-    ss = [sum(elements[i:i+limit]) for limit in range(1,n) for i in range(n)]
-    return len(set(ss)) + 1
+    ans = set()
+    for i in range(n):
+        ss = elements[i]
+        ans.add(ss)
+        for j in range(i+1,i+n):
+            ss += elements[j%n]
+            ans.add(ss)
+    return len(ans)
