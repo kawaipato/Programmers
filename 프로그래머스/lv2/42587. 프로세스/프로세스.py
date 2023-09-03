@@ -1,10 +1,15 @@
 def solution(priorities, location):
-    n = len(priorities)
-    t = 0
-    for i in range(n):
-        while priorities[t%n] == 0 or priorities[t%n] < max(priorities):
-            t += 1
-        if t%n == location:
-            return i + 1
-        priorities[t%n] = 0
-        print(priorities, t)
+    ans,c = 0, 0
+    best = sorted(priorities, reverse=True)
+    while True:
+        for i, p in enumerate(priorities):
+            b = best[c]
+            if p == b:
+                c += 1
+                ans += 1
+                if i == location:
+                    break
+        else:
+            continue
+        break
+    return ans
