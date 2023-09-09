@@ -1,18 +1,8 @@
 def solution(s):
-    ans, stack = 0, ["", 0, 0]
-    for ss in s:
-        if stack[0] == "":
-            stack[0] = ss
-            stack[1] += 1
-        else:
-            if stack[0] == ss:
-                stack[1] += 1
-            else:
-                stack[2] += 1
-            if stack[1] == stack[2]:
-                ans += 1
-                stack = ["", 0, 0]
-        # print(stack)
-    if stack != ["",0,0]:
-        ans += 1
-    return ans
+    first, cnt, ans = 0, 0, 0
+    for idx, ss in enumerate(s):
+        cnt += 1 if s[first] == ss else -1
+        if cnt == 0:
+            ans += 1
+            first = idx + 1
+    return ans + 1 if cnt else ans
