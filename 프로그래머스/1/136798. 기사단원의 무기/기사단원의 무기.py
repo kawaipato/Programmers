@@ -1,17 +1,9 @@
 def Divisor(num):
-        wow = 0
+        wow = []
         for i in range(1,int(num**(1/2))+1):
             if num % i == 0:
-                wow += 1
-                if (i**2) != num:
-                    wow += 1
-        return wow
+                wow.append(i)
+                wow.append(num//i)
+        return len(set(wow))
 def solution(number, limit, power):
-    ans = 0
-    for n in range(1,number+1):
-        a = Divisor(n)
-        if a > limit:
-            ans += power
-        else:
-            ans += a
-    return ans
+    return sum([Divisor(num) if Divisor(num) <= limit else power for num in range(1,number+1) ])
