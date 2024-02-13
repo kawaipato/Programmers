@@ -1,5 +1,4 @@
-def solution(number, limit, power):
-    def Divisor(num):
+def Divisor(num):
         wow = 0
         for i in range(1,int(num**(1/2))+1):
             if num % i == 0:
@@ -7,6 +6,7 @@ def solution(number, limit, power):
                 if (i**2) != num:
                     wow += 1
         return wow
+def solution(number, limit, power):
     ans = 0
     for n in range(1,number+1):
         a = Divisor(n)
