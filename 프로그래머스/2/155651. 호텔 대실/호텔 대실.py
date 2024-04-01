@@ -1,21 +1,11 @@
-from heapq import heappush, heappop
 def solution(book_time):
-    rooms, books, ans = [], [], 0
+    dic = [0 for _ in range(60*24)]
     for book in book_time:
-        start, end = book
-        s1, s2 = start.split(':')
-        e1, e2 = end.split(':')
-        st = int(s1) * 60 + int(s2)
-        et = int(e1) * 60 + int(e2)
-        heappush(books, [st,et])
-    while books:
-        st, et = heappop(books)
-        if not rooms:
-            rooms.append([et,st])
-        else:
-            room = heappop(rooms)
-            if room[0] + 10 > st:
-                heappush(rooms,room)
-            heappush(rooms,[et,st])
-    ans = len(rooms)
-    return ans
+        start = int(book[0][:2]) * 60 + int(book[0][3:])
+        end = int(book[1][:2]) * 60 + int(book[1][3:]) + 10
+        if end > 60*24 - 1:
+            end = 60*24 - 1
+        for i in range(start,end):
+            dic[i] += 1
+    return max(dic)
+        
