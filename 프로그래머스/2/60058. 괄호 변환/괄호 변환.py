@@ -1,36 +1,32 @@
 def check(p):
-    stack = []
-    for char in p:
-        if char == '(':
-            stack.append(char)
+    now = 0
+    for pp in p:
+        if pp == '(':
+            now += 1
         else:
-            if not stack:
+            if now <= 0:
                 return False
-            stack.pop()
-    return len(stack) == 0
-
+            now -= 1
+    return now == 0
 def divide(p):
-    count = 0
-    for i, char in enumerate(p):
-        if char == '(':
-            count += 1
+    cnt = 0
+    for idx, pp in enumerate(p):
+        if pp == ')':
+            cnt += 1
         else:
-            count -= 1
-        if count == 0:
-            return p[:i+1], p[i+1:]
+            cnt -= 1
+        if cnt == 0:
+            return p[:idx+1], p[idx+1:]
 
 def solution(p):
-    if not p:
-        return ""
-
+    if p == '': return ''
     u, v = divide(p)
     if check(u):
         return u + solution(v)
     else:
-        answer = "(" + solution(v) + ")"
-        for ch in u[1:-1]:
-            if ch == '(':
-                answer += ')'
-            else:
-                answer += '('
+        answer = '(' + solution(v) + ')'
+        for uu in u[1:-1]:
+            if uu == ')': answer += '('
+            else:   answer += ')'
         return answer
+        
